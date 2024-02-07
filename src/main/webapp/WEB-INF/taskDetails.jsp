@@ -18,21 +18,23 @@
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
-	<div class="container mt-5 bg-light">
-		<a href="javascript:history.back()">back</a>
+	<div class="container mt-4 d-flex justify-content-around align-items-center bg-success">
+		<div>
+			<h1 class="text-center bg-success">Task's details</h1>
+		</div>
+		<div>
+			<a href="javascript:history.back()" class="btn btn-secondary ">Back</a>
+		</div>
 	</div>
 	<div class="container mt-5 bg-success d-flex justify-content-around p-3">
 	
 		<div class="d-flex justify-content-between align-items-center">
 			<div>
 			    <h1><c:out value="${task.title}"/></h1>
-			    <p style="font-size:larger">Description: <c:out value="${task.description}"/></p>
-			    <p style="font-size:larger">Contact: <c:out value="${task.user.email}"/></p>
+			    <p style="font-size:larger">Description: <em><c:out value="${task.description}"/></em></p>
+			    <p style="font-size:larger">Contact: <em><c:out value="${task.user.email}"/></em> </p>
 			</div>
-			
 		</div>
-	   
-	    <br />
 	    <div class="d-flex align-items-center">
 			<c:if test="${not empty task.imageBase64}">
 	        <h3 style="margin-right:50px;">Picture:</h3>

@@ -25,61 +25,53 @@
 					<div>
 					    <h1 class="text-start">Dashboard</h1>
 					</div>
-					<div>
-					    <form id="logoutForm" method="POST" action="/logout">
-			        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			        		<input type="submit" value="Logout!" />
-			    		</form>
-					</div>
 				</div>
 			    <h2 class="text-start">Welcome , <a href="/users/tasks/personal/${currentUser.id}"><c:out value="${currentUser.username}"/></a>  </h2>
 			</div>
 		    <div class="mt-3">
 		    	<h1> <c:out value="${currentUser.neighborhood.name}"/> </h1>
+		    	<form id="logoutForm" method="POST" action="/logout">
+			        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			        <input type="submit" value="Logout!" />
+			    </form>
 		    </div>
 		</div>
 	   <div>
-	   	<a class="btn btn-primary mt-3" href="users/tasks/new">create task</a>
+	   		<a class="btn btn-primary mt-3" href="users/tasks/new">create task</a>
 	   </div>
-	   
-	    
 	    <table class="table table-bordered table-light mt-3">
-    <thead>
-        <tr class="table-active">
-            <th>Neighbor</th>
-            <th>Task</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="task" items="${tasks}">
-            <c:if test="${empty task.acceptedUser}">
-                <tr>
-                    <td><c:out value="${task.user.username}" /></td>
-                    <td><c:out value="${task.title}" /></td>
-                    <c:choose>
-                        <c:when test="${task.user.id eq currentUser.id}">
-                            <td><a href="/users/tasks/${task.id}">view</a> | <a href="/users/tasks/${task.id}/edit">edit</a></td>
-                        </c:when>
-                        <c:otherwise>
-                            <td class="d-flex">
-                                <a href="/users/tasks/${task.id}">view</a> | | |
-                                <form action="/users/tasks/${task.id}/apply" method="POST">
-                                    <button type="submit" class="btn btn-success btn-sm">Apply</button>
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                </form>
-                            </td>
-                        </c:otherwise>
-                    </c:choose>
-                </tr>
-            </c:if>
-        </c:forEach>
-    </tbody>
-</table>
+		    <thead>
+		        <tr class="table-active">
+		            <th>Neighbor</th>
+		            <th>Task</th>
+		            <th>Actions</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <c:forEach var="task" items="${tasks}">
+		            <c:if test="${empty task.acceptedUser}">
+		                <tr>
+		                    <td><c:out value="${task.user.username}" /></td>
+		                    <td><c:out value="${task.title}" /></td>
+		                    <c:choose>
+		                        <c:when test="${task.user.id eq currentUser.id}">
+		                            <td><a href="/users/tasks/${task.id}">view</a> | <a href="/users/tasks/${task.id}/edit">edit</a></td>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <td class="d-flex">
+		                                <a href="/users/tasks/${task.id}">view</a> | | |
+		                                <form action="/users/tasks/${task.id}/apply" method="POST">
+		                                    <button type="submit" class="btn btn-success btn-sm">Apply</button>
+		                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		                                </form>
+		                            </td>
+		                        </c:otherwise>
+		                    </c:choose>
+		                </tr>
+		            </c:if>
+		        </c:forEach>
+		    </tbody>
+		</table>
 	</div>
-    
-    
-    
-    
 </body>
 </html>

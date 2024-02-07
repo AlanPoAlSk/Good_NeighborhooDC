@@ -25,9 +25,10 @@
 	    <a href="/dashboard" class="btn btn-secondary">Back</a>
 	    <div class="bg-light d-flex justify-content-between p-4">
 		    <div>
-			    <form:form action="/users/tasks/${task.id}/edit" method="PUT" modelAttribute="task">
+			    <form:form action="/users/tasks/${task.id}/edit" method="PUT" modelAttribute="task" enctype="multipart/form-data">
 					<form:hidden path="user"/>
 			    <form:errors path="*" cssClass="error" />
+			    
 			        <p>
 			            <form:label path="title">Title:</form:label>
 			            <form:input path="title"/>
@@ -36,19 +37,20 @@
 			            <form:label path="description">Description:</form:label>
 			            <form:textarea path="description"/>
 			        </p>
-			        <%-- <p>
-			        	<form:label path="neighborhood"> Category: </form:label>
-			            <form:select path="neighborhood">
-			            <c:forEach var="neighborhood" items="${neighborhoods}">
-			            	<option value="${neighborhood.id}"><c:out value="${neighborhood.name}" /></option>
-			        	</c:forEach>
-			            </form:select>
-			            
-			        </p> --%>
-			       
+			         <p>
+				        <form:label path="imageFile">Upload Image:</form:label>
+			        	<input type="file" id="imageFile" name="imageFile" accept="image/*" />
+		    		</p>
+		    		
 			        <input type="submit" class="btn btn-success" value="Edit!"/>
 			    </form:form>
 		    </div>
+		    <div class="d-flex align-items-center">
+				<c:if test="${not empty task.imageBase64}">
+			        <h3 style="margin-right:50px;">Picture:</h3>
+			        <img src="${task.imageBase64}" alt="Task Image" class="img-fluid rounded" style="width: 250px; height: 250px;"/>
+		    	</c:if>
+	    	</div>
 		    <div>
 		    	<form action="/users/tasks/${task.id}" method="post">
 		    		<input type="hidden" name="_method" value="delete" />
@@ -58,3 +60,5 @@
 		    </div>
 	    </div>
 	</div>
+</body>
+</html>
