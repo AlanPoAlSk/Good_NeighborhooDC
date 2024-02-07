@@ -14,7 +14,7 @@
             background-position: top; 
         }
 
-    </style>
+</style>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="bg-light">

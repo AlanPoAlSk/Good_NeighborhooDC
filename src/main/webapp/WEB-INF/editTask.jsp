@@ -8,44 +8,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Edit Task</title>
+<style>
+        body {
+            background-image: url('/images/gn2.png'); 
+            background-size: cover; 
+            background-position: top; 
+        }
+
+</style>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
 	<div class="container mt-5">
-	    <h1 class="text-center">Edit Task</h1>
-	    <h2> </h2>
-	   
-	    <br />
-	    <a href="/dashboard" class="btn btn-secondary">Back</a>
+	    <h1 class="text-center bg-success">Edit Task</h1>
 	    
-	    <form:form action="/users/tasks/${task.id}/edit" method="PUT" modelAttribute="task">
-			<form:hidden path="user"/>
-	    <form:errors path="*" cssClass="error" />
-	        <p>
-	            <form:label path="title">Title:</form:label>
-	            <form:input path="title"/>
-	        </p>
-	        <p>
-	            <form:label path="description">Description:</form:label>
-	            <form:textarea path="description"/>
-	        </p>
-	        <%-- <p>
-	        	<form:label path="neighborhood"> Category: </form:label>
-	            <form:select path="neighborhood">
-	            <c:forEach var="neighborhood" items="${neighborhoods}">
-	            	<option value="${neighborhood.id}"><c:out value="${neighborhood.name}" /></option>
-	        	</c:forEach>
-	            </form:select>
-	            
-	        </p> --%>
-	       
-	        <input type="submit" class="btn btn-success" value="Edit!"/>
-	    </form:form>
-	    <div>
-	    	<form action="/users/tasks/${task.id}" method="post">
-	    		<input type="hidden" name="_method" value="delete" />
-	    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	    		<button type="submit" class="btn btn-danger">Delete</button>
-	    	</form>
+	    <a href="/dashboard" class="btn btn-secondary">Back</a>
+	    <div class="bg-light d-flex justify-content-between p-4">
+		    <div>
+			    <form:form action="/users/tasks/${task.id}/edit" method="PUT" modelAttribute="task">
+					<form:hidden path="user"/>
+			    <form:errors path="*" cssClass="error" />
+			        <p>
+			            <form:label path="title">Title:</form:label>
+			            <form:input path="title"/>
+			        </p>
+			        <p>
+			            <form:label path="description">Description:</form:label>
+			            <form:textarea path="description"/>
+			        </p>
+			        <%-- <p>
+			        	<form:label path="neighborhood"> Category: </form:label>
+			            <form:select path="neighborhood">
+			            <c:forEach var="neighborhood" items="${neighborhoods}">
+			            	<option value="${neighborhood.id}"><c:out value="${neighborhood.name}" /></option>
+			        	</c:forEach>
+			            </form:select>
+			            
+			        </p> --%>
+			       
+			        <input type="submit" class="btn btn-success" value="Edit!"/>
+			    </form:form>
+		    </div>
+		    <div>
+		    	<form action="/users/tasks/${task.id}" method="post">
+		    		<input type="hidden" name="_method" value="delete" />
+		    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		    		<button type="submit" class="btn btn-danger">Delete</button>
+		    	</form>
+		    </div>
 	    </div>
 	</div>
