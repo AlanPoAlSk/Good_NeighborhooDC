@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
-	<div class="container mt-5 bg-light">
-		<div class="d-flex justify-content-around align-items-center">
+	<div class="container mt-5 bg-light p-3">
+		<div class="d-flex justify-content-around align-items-center bg-success">
 			<div>
 				<h1 class="text-center"> <c:out value="${user.username}"/>'s Personal Section</h1>
 			</div>
@@ -28,9 +28,9 @@
 			</div>
 		</div>
 		<h1>Tasks</h1>
-    	<table class="table">
+    	<table class="table table-bordered table-light mt-3">
         <thead>
-            <tr>
+            <tr class="table-dark">
             	<th>Tasks Owner</th>
                 <th>Title</th>
                 <th>Description</th>

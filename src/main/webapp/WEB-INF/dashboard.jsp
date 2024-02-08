@@ -41,7 +41,7 @@
 	   </div>
 	    <table class="table table-bordered table-light mt-3">
 		    <thead>
-		        <tr class="table-active">
+		        <tr class="table-dark">
 		            <th>Neighbor</th>
 		            <th>Task</th>
 		            <th>Actions</th>

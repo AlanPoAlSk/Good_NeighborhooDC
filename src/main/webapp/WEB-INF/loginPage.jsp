@@ -23,7 +23,7 @@
 	<div class="container mt-5">
     	<div class="col-md-6 offset-md-3 bg-white p-4 shadow">
 		    <c:if test="${logoutMessage != null}">
-		        <c:out value="${logoutMessage}"></c:out>
+		       <p class="text-success"><c:out value="${logoutMessage}"></c:out></p>
 		    </c:if>
     		<h1 class="text-center">Login</h1>
 		    <c:if test="${errorMessage != null}">
