@@ -79,8 +79,18 @@ public class TaskController {
 	}
 	
 	@GetMapping("/users/tasks/{id}")
-	public String taskDetails(@PathVariable("id")Long id, Model model) {
+	public String taskDetails(@PathVariable("id")Long id, Model model, Principal principal) {
 		 Task task = taskService.oneTask(id);
+//		 System.out.println("Principal Object: " + principal);
+//		 
+//		 if (!isAuthorizedUser(task, principal)) {
+//		        return "redirect:/dashboard";
+//		    }
+		 
+		 String currentUsername = principal.getName();
+		 Long currentUserId = userService.getUserIdByUsername(currentUsername);
+//		 System.out.println("Task Accepted User ID: " + (task.getAcceptedUser() != null ? task.getAcceptedUser().getId() : "null"));
+//		 System.out.println("Current User ID: " + currentUserId);
 	
 		if (task != null) {
 			byte[] imageBytes = task.getImageBytes();
@@ -90,7 +100,7 @@ public class TaskController {
 	            model.addAttribute("base64Image", base64Image);
 	        }
 
-	        
+	        model.addAttribute("currentUserId", currentUserId);
 	        model.addAttribute("task", task);
 	    } else {
 	        // Handle the case where the task is not found
@@ -147,6 +157,26 @@ public class TaskController {
 	    }
 	    return "redirect:/dashboard";
 	}
+	
+	@PostMapping("/users/tasks/{id}/undo")
+	public String undoApply(@PathVariable("id") Long id, Principal principal) {
+		Task task = taskService.oneTask(id);
+	    if (task != null && task.getStatus() == TaskStatus.ACCEPTED && task.getAcceptedUser() != null) {
+	        String username = principal.getName();
+	        if (task.getAcceptedUser().getUsername().equals(username)) { // Check if the current user is the one who accepted the task
+	            task.setAcceptedUser(null);
+	            task.setStatus(TaskStatus.OPEN);
+	            taskService.updateTask(task);
+	            System.out.println("successMessage ,Apply status undone successfully.");
+	        } else {
+	        	System.out.println("errorMessage ,You are not authorized to undo the apply status for this task.");
+	        }
+	    } else {
+	    	System.out.println("errorMessage, Task not found or not in the ACCEPTED status.");
+	    }
+	    return "redirect:/dashboard";
+	}
+	
 
 	@GetMapping("/users/tasks/personal/{id}")
 	public String acceptedTasks(@PathVariable("id") Long userId,Model model, Principal principal) {

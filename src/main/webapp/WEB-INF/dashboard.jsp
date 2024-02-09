@@ -39,6 +39,9 @@
 	   <div>
 	   		<a class="btn btn-primary mt-3" href="users/tasks/new">create task</a>
 	   </div>
+	   <div class="bg-light mt-3">
+	   		<h2>All Tasks available in <c:out value="${currentUser.neighborhood.name}"/>:</h2>
+	   </div>
 	    <table class="table table-bordered table-light mt-3">
 		    <thead>
 		        <tr class="table-dark">

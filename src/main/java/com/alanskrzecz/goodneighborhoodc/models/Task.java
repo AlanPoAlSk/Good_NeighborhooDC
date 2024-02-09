@@ -159,6 +159,11 @@ public class Task {
 	public void setImageBytes(byte[] imageBytes) {
 		this.imageBytes = imageBytes;
 	}
+	
+	public void undoApply() {
+        this.acceptedUser = null; // Reset the accepted user
+        this.status = TaskStatus.OPEN; // Reset the status to OPEN
+    }
 
 
 	@PrePersist

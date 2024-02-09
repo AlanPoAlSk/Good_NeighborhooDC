@@ -33,12 +33,24 @@
 			    <h1><c:out value="${task.title}"/></h1>
 			    <p style="font-size:larger">Description: <em><c:out value="${task.description}"/></em></p>
 			    <p style="font-size:larger">Contact: <em><c:out value="${task.user.email}"/></em> </p>
+			    <c:choose>
+			    	<c:when test="${not empty task.acceptedUser and task.acceptedUser.id eq currentUserId}">
+					    <form action="/users/tasks/${task.id}/undo" method="POST">
+				            <button type="submit" class="btn btn-success">Cancel application</button>
+				            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				        </form>
+			    	</c:when>
+			    	<%-- <c:otherwise>
+			    		<p>Accepted User ID: ${task.acceptedUser.id}</p>
+						<p>Current User ID: ${currentUserId}</p>
+			    	</c:otherwise> --%>
+			    </c:choose>
 			</div>
 		</div>
 	    <div class="d-flex align-items-center">
 			<c:if test="${not empty task.imageBase64}">
-	        <h3 style="margin-right:50px;">Picture:</h3>
-	        <img src="${task.imageBase64}" alt="Task Image" class="img-fluid rounded" style="width: 250px; height: 250px;"/>
+		        <h3 style="margin-right:50px;">Picture:</h3>
+		        <img src="${task.imageBase64}" alt="Task Image" class="img-fluid rounded" style="width: 250px; height: 250px;"/>
 	    	</c:if>
 	    </div>
 	</div>

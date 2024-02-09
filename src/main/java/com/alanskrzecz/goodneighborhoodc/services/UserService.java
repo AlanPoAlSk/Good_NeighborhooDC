@@ -42,4 +42,10 @@ public class UserService {
 			return null;
 		}
 	}
+
+
+    public Long getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return user != null ? user.getId() : null;
+    }
 }
